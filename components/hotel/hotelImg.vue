@@ -1,5 +1,4 @@
 <template>
-    
       <div class="hotel_img">
         <el-row :gutter="20" type="flex" justify="space-between">
           <el-col :span="16" class="big_img">

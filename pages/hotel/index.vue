@@ -30,20 +30,35 @@
       <HotelImg />
       <!-- table栏 -->
      <HotelTable/>
+     <!-- 酒店地图 -->
+     <HotelMap/>
+     <!-- 酒店评论 -->
+     <HotelComment/>
     </div>
   </div>
 </template>
 
 <script>
 import HotelImg from "@/components/hotel/hotelImg.vue"
-import HotelTable from "@/components/hotel/HotelTable.vue"
+import HotelTable from "@/components/hotel/hotelTable.vue"
+import HotelMap from "@/components/hotel/hotelMap.vue"
+import HotelComment from "@/components/hotel/hotelComment.vue"
 export default {
   components:{
     HotelImg,
-     HotelTable
+     HotelTable,
+      HotelMap,
+      HotelComment
   },
   data(){
     return{}
+  },
+  mounted () {
+    this.$axios({
+      url:"/hotels"
+    }).then(res=>{
+      console.log(res);
+    })
   }
 };
 </script>
