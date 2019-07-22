@@ -14,10 +14,16 @@
         <a href="JavaScript:;">北京</a>
       </span>
     </div>
+<<<<<<< HEAD
     <!-- 推荐攻略-->
     <el-row type="flex" justify="space-between" align="middle" class="el_post_title">
       <h2 class="post_title">推荐攻略</h2>
       <el-button type="primary" icon="el-icon-edit">写游记</el-button>
+=======
+    <el-row type="flex" justify="space-between" align="middle">
+      <h2>推荐攻略</h2>
+      <el-button type="primary" icon="el-icon-edit" @click="$router.push({path: '/post/create'})">写游记</el-button>
+>>>>>>> e4057f12c64da89e9b89d86d9ef597e116817963
     </el-row>
     <!--  -->
     <div>
@@ -78,7 +84,12 @@ export default {
   },
   mounted() {
     this.$axios({
+<<<<<<< HEAD
       url: "/posts"
+=======
+      url: "/posts",
+      method: "GET"
+>>>>>>> e4057f12c64da89e9b89d86d9ef597e116817963
     }).then(res => {
       // console.log(res);
       const { data } = res.data;
