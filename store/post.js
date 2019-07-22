@@ -1,7 +1,14 @@
 export const state = () => ({
-    list: [1,2,3]
+    //文章数据
+    postInfo:{
+        // postList:[],
+    } ,
+
 })
 
 export const mutations = {
-    setData(state,data){}
+    setPostData(state,data){
+        state.postInfo=data
+    },
+
 }
