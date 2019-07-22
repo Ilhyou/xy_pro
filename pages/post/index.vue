@@ -1,69 +1,52 @@
 <template>
-  <div style="padding:50px;">
-     <h1 style="margin-bottom:50px;">组件递归</h1>
-
-    <NavsItem :data="navs"/>
-
+  <div>
+    <div class="box">
+      <Postleft :data="navs" />
+      <Postright />
+    </div>
   </div>
 </template>
 
 <script>
-
-import NavsItem from "@/components/post/navsItem";
+import Postleft from "@/components/post/postleft";
+import Postright from "@/components/post/postright";
 
 export default {
-    components: {
-        NavsItem,
-    },
-    data(){
-        return {
-            navs: [
-                {
-                    title: "衣服",
-                    children: [
-                        { 
-                            title: "男装",
-                            children: [
-                                { 
-                                    title: "T恤",
-                                    children: [ 
-                                        {title: "短袖"}, 
-                                        { title: "长袖" }
-                                     ]
-                                }
-                            ]
-                        },
-                        { 
-                            title: "女装",
-                            children: [
-                                {
-                                    title: "裙子",
-                                    children: [
-                                        { title: "连衣裙" },
-                                        { title: "短裙" }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    title: "电器",
-                    children: [
-                        { title: "电视", children: [
-                            { title: "液晶电视" },
-                            { title: "普通电视"}
-                        ] },
-                        { title: "冰箱" },
-                        { title: "空调" },
-                    ]
-                }
-            ]
-        }
-    }
-}
+  components: {
+    Postleft,
+    Postright
+  },
+  data() {
+    return {
+      navs: []
+    };
+  },
+  mounted() {
+    // 把axios绑定到原型
+    // Vue.prototype.$axios = axios
+    this.$axios({
+      url: "/posts/cities",
+      method: "GET"
+    }).then(res => {
+      // console.log(res);
+      const { data } = res.data;
+      this.navs = data;
+    });
+  }
+};
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.box {
+  margin: auto;
+  width: 1000px;
+  display: flex;
+  Postleft {
+    width: 270px;
+  }
+  Postright {
+    width: 730px;
+  }
+}
 </style>
+
