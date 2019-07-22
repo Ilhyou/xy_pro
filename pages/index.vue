@@ -92,7 +92,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .container{
     min-width:1000px;
     margin:0 auto;
