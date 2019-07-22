@@ -1,55 +1,88 @@
 <template>
-  <!-- <div style="padding:50px;">
-     <div id="container" style="width:500px; height:500px;"></div>
-  </div>-->
-  <section class="contianer">
-    <!-- 筛选-->
-    <HotelFilters />
-
-    <!-- 酒店列表 -->
-    <HotelItem />
-  </section>
+  <div class="hotel">
+    <div class="hotel-main">
+      <!-- 面包屑 -->
+      <div class="breadcrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/' }">酒店</el-breadcrumb-item>
+          <el-breadcrumb-item>南京酒店</el-breadcrumb-item>
+          <el-breadcrumb-item>好来阁商务宾馆</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
+      <!-- 酒店标题 -->
+      <div class="hotel-title">
+        <h4>
+          好来阁商务宾馆
+          <span>
+            <i class="iconfont iconhuangguan"></i>
+            <i class="iconfont iconhuangguan"></i>
+            <i class="iconfont iconhuangguan"></i>
+            <i class="iconfont iconhuangguan"></i>
+          </span>
+        </h4>
+        <p>hao lai ge shang wu hotel</p>
+        <div class="hotel_address">
+          <i class="iconfont iconlocation"></i>
+          高淳县淳溪镇镇兴路118号(高淳县委党校对面)
+        </div>
+      </div>
+      <!-- 酒店图片 -->
+      <HotelImg />
+      <!-- table栏 -->
+      <HotelTable />
+      <!-- 酒店地图 -->
+      <HotelMap />
+      <!-- 酒店评论 -->
+      <HotelComment />
+    </div>
+  </div>
 </template>
 
+
 <script>
-import HotelItem from "../../components/hotel/hotelItem";
-import HotelFilters from "../../components/hotel/hotelFilters";
+import HotelImg from "@/components/hotel/hotelImg.vue";
+import HotelTable from "@/components/hotel/hotelTable.vue";
+import HotelMap from "@/components/hotel/hotelMap.vue";
+import HotelComment from "@/components/hotel/hotelComment.vue";
 export default {
-  mounted() {
-    // // 页面加加载之后执行
-    // window.onLoad = function() {
-    //   // 生成地图.container是显示地图的div的id
-    //   var map = new AMap.Map("container", {
-    //     zoom: 11, //放大级别
-    //     center: [118.8718107, 31.32846821], //中心点坐标，经纬度
-    //     viewMode: "3D" //使用3D视图
-    //   });
-    //   // 创建一个 Marker 实例：
-    //   var marker = new AMap.Marker({
-    //     //content: "<div style='width:20px; height:20px; background:red;'>1</div>",
-    //     position: new AMap.LngLat(118.8718107, 31.32846821), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-    //     title: "北京"
-    //   });
-    //   map.add(marker);
-    // };
-    // // 地图的链接
-    // var key = "fc349821166279b8365299d22d7cf202";
-    // var url = `https://webapi.amap.com/maps?v=1.4.15&key=${key}&callback=onLoad`;
-    // var jsapi = document.createElement("script");
-    // jsapi.charset = "utf-8";
-    // jsapi.src = url;
-    // document.head.appendChild(jsapi);
-  },
   components: {
-    HotelItem,
-    HotelFilters
+    HotelImg,
+    HotelTable,
+    HotelMap,
+    HotelComment
+  },
+  data() {
+    return {};
+  },
+  mounted() {
+    this.$axios({
+      url: "/hotels"
+    }).then(res => {
+      console.log(res);
+    });
   }
 };
 </script>
 
-<style scoped lang="less">
-.contianer {
+
+<style lang="less" scoped>
+.hotel {
+  min-width: 1000px;
+}
+.hotel-main {
   width: 1000px;
-  margin: 0px auto;
+  margin: 0 auto;
+  .breadcrumb {
+    margin: 20px 0px;
+  }
+  .hotel-title {
+    h4 {
+      font-size: 28px;
+      font-weight: normal;
+      i {
+        color: orange;
+      }
+    }
+  }
 }
 </style>

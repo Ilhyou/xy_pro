@@ -10,7 +10,13 @@
         <el-col :span="8" style="padding-left: 10px; padding-right: 10px;">
           <span class="img-wrapper">
             <a href="javascript:;">
-              <img :src="item.photos" :alt="item.name" width="320" height="210" />
+              <img
+                :src="item.photos"
+                :alt="item.name"
+                width="320"
+                height="210"
+                @click="openDetail(item.id)"
+              />
             </a>
           </span>
         </el-col>
@@ -104,6 +110,13 @@ export default {
     // 页数的切换，value是选中的页数
     handleCurrentChange(value) {
       this.pageIndex = value;
+    },
+    // 进入酒店详情
+    openDetail(id) {
+      console.log(id);
+      this.$router.push({
+        path: "hotel/hotelDetails?id="+id
+      });
     }
   },
   computed: {
