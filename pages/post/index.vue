@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .box {
   margin: auto;
   width: 1000px;
