@@ -17,14 +17,14 @@
     <!-- 推荐攻略-->
     <el-row type="flex" justify="space-between" align="middle" class="el_post_title">
       <h2 class="post_title">推荐攻略</h2>
-      <el-button type="primary" icon="el-icon-edit">写游记</el-button>
+      <el-button type="primary" icon="el-icon-edit" @click="$router.push({path:'/post/create'})">写游记</el-button>
     </el-row>
     <!--  -->
     <div>
       <div v-for="(item, index) in dataList" :key="index">
         <div>
           <a href>{{item.title}}</a>
-          <span class="post_item">{{item.summary}}</span>
+          <a :href="`/post/detail?id=${item.id}`" class="post_item" v-html="item.summary"></a>
           <div>
             <el-row class="a_img" type="flex" justify="space-between">
               <a href v-for="(items, indexs) in item.images.slice(0,3)" :key="indexs">
@@ -41,10 +41,10 @@
                 <div class="by_img_span">
                   <i>by</i>
                   <img src="http://157.122.54.189:9095/assets/images/avatar.jpg" alt />
-                  <i>{{item.account.nickname}}</i>
+                  <i v-html="item.account.nickname"></i>
                 </div>
                 <span>
-                  <i class="el-icon-view">{{item.watch}}</i>
+                  <i class="el-icon-view" v-html="item.watch"></i>
                 </span>
               </el-row>
               <el-row>10赞</el-row>
@@ -52,12 +52,12 @@
           </div>
         </div>
       </div>
-
+      <!-- 分页 -->
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="pageIndex"
-        :page-sizes="[2, 3, 4, 5]"
+        :page-sizes="[1, 2, 3, 4]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -72,9 +72,30 @@ export default {
       data: [],
       images: [],
       pageIndex: 1, // 当前页数
-      pageSize: 3, // 当前页面的条数
+      pageSize: 2, // 当前页面的条数
       total: 0 // 总条数
     };
+  },
+  watch: {
+    // 监听路由的变化,，同一个页面之间的跳转不会重新加载组件
+    // 1.可以通过监听$route的方法来实现
+    // 2.
+    $route() {
+      //  console.log(123)
+      const { city } = this.$route.query;
+      this.$axios({
+        url: "/posts",
+        params: {
+          _start: this.pageIndex,
+          _limit: this.pageSize,
+          city
+        }
+      }).then(res => {
+        console.log(res);
+        this.data = res.data.data;
+        this.total = res.data.data.length;
+      });
+    }
   },
   mounted() {
     this.$axios({

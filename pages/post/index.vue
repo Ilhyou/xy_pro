@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="box">
-            <Postleft :data="navs" />
+            <Postleft :data="navs"  />
             <Postright />
         </div>
     </div>
