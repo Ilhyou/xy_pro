@@ -14,7 +14,7 @@
     </div>
     <el-row type="flex" justify="space-between" align="middle">
       <h2>推荐攻略</h2>
-      <el-button type="primary" icon="el-icon-edit">写游记</el-button>
+      <el-button type="primary" icon="el-icon-edit" @click="$router.push({path: '/post/create'})">写游记</el-button>
     </el-row>
     <div class="groom">
       <a href="JavaScript:;" v-for="(item, index) in data" :key="index">
@@ -50,7 +50,7 @@ export default {
   mounted() {
     this.$axios({
       url: "/posts",
-      method: "GEt"
+      method: "GET"
     }).then(res => {
       console.log(res);
       const { data } = res.data;

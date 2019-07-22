@@ -237,7 +237,7 @@ export default {
                     this.$message.success(message);
                     this.$router.push("/post");
                 }
-                this.$store.commit("post/setPostData", data);
+                // this.$store.commit("post/setPostData", data);
             });
         },
         // 输入游玩城市时触发
