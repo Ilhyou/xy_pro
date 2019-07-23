@@ -9,9 +9,20 @@
     <div>
       <span class="search_recommend">
         推荐:
-        <a href="JavaScript:;">广州</a>
+        <!-- <a href="JavaScript:;">广州</a>
         <a href="JavaScript:;">上海</a>
-        <a href="JavaScript:;">北京</a>
+        <a href="JavaScript:;">北京</a>-->
+        <!-- const { data } = res.data; -->
+        <nuxt-link
+          v-for="(item, index) in ['广州','上海','北京']"
+          :key="index"
+          :to="`/post?city=${item}`"
+          class="nuxt_link_tui"
+        >
+          <span>{{item[0]}}</span>
+          <span>{{item[1]}}</span>
+          <span>{{item[2]}}</span>
+        </nuxt-link>
       </span>
     </div>
     <!-- 推荐攻略-->
@@ -47,7 +58,7 @@
                   <i class="el-icon-view" v-html="item.watch"></i>
                 </span>
               </el-row>
-              <el-row>10赞</el-row>
+              <el-row>{{item.like}}赞</el-row>
             </el-row>
           </div>
         </div>
@@ -57,7 +68,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="pageIndex"
-        :page-sizes="[1, 2, 3, 4]"
+        :page-sizes="[ 2, 3, 4, 5 ]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -86,14 +97,16 @@ export default {
       this.$axios({
         url: "/posts",
         params: {
-          _start: this.pageIndex,
-          _limit: this.pageSize,
+          // _start: this.pageIndex,
+          // _limit: this.pageSize,
           city
         }
       }).then(res => {
         console.log(res);
-        this.data = res.data.data;
-        this.total = res.data.data.length;
+        const { data } = res.data;
+        this.data = data;
+        this.total = res.data.total;
+        // console.log(total)
       });
     }
   },
@@ -105,7 +118,7 @@ export default {
       const { data } = res.data;
       this.data = data;
       this.total = res.data.total;
-      console.log(this.total);
+      // console.log(this.total);
     });
   },
   methods: {
@@ -147,7 +160,7 @@ export default {
 .search_recommend {
   font-size: 12px;
   padding: 10px;
-  a {
+  .nuxt_link_tui {
     padding-left: 10px;
   }
   :hover {
