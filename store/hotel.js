@@ -10,8 +10,6 @@ export const state = () => {
 export const mutations = {
 	// 设置酒店的信息
 	setInfoData(state, data) {
-		console.log(data);
 		state.infoData = data;
-		console.log(state.infoData);
 	}
 }
