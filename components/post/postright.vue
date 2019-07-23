@@ -3,12 +3,7 @@
     <!-- 搜索框 -->
     <el-row type="flex" class="search">
       <el-input placeholder="请输入想去的地方,比如:'广州'" class="el_inp" v-model="search_input"></el-input>
-      <el-button
-        type="primary"
-        icon="el-icon-search"
-        class="el_btn"
-        @click="click_search_input(`/post?city=${search_input}`)"
-      ></el-button>
+      <el-button type="primary" icon="el-icon-search" class="el_btn" @click="click_search_input"></el-button>
     </el-row>
     <!-- 推荐 -->
     <div>
@@ -21,7 +16,7 @@
         <nuxt-link
           v-for="(item, index) in ['广州','上海','北京']"
           :key="index"
-          :to="`/post?city=${item }`"
+          :to="`/post?city=${item}`"
           class="nuxt_link_tui"
         >
           <span>{{item[0]}}</span>
@@ -145,7 +140,8 @@ export default {
         params: {
           // _start: this.pageIndex,
           // _limit: this.pageSize,
-          city
+
+          city: this.search_input
         }
       }).then(res => {
         console.log(res);
