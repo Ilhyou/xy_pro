@@ -2,27 +2,12 @@
       <div class="hotel_img">
         <el-row :gutter="20" type="flex" justify="space-between">
           <el-col :span="16" class="big_img">
-            <img src="http://157.122.54.189:9093/images/hotel-pics/1.jpeg" alt />
+            <img :src=imgList[current] alt />
           </el-col>
           <el-col :span="8" class="min_img">
             <el-row class="pictures">
-              <el-col :span="12" class="small_pictures">
-                <img src="http://157.122.54.189:9093/images/hotel-pics/1.jpeg" alt />
-              </el-col>
-              <el-col :span="12" class="small_pictures">
-                <img src="http://157.122.54.189:9093/images/hotel-pics/1.jpeg" alt />
-              </el-col>
-              <el-col :span="12" class="small_pictures">
-                <img src="http://157.122.54.189:9093/images/hotel-pics/1.jpeg" alt />
-              </el-col>
-              <el-col :span="12" class="small_pictures">
-                <img src="http://157.122.54.189:9093/images/hotel-pics/1.jpeg" alt />
-              </el-col>
-              <el-col :span="12" class="small_pictures">
-                <img src="http://157.122.54.189:9093/images/hotel-pics/1.jpeg" alt />
-              </el-col>
-              <el-col :span="12" class="small_pictures">
-                <img src="http://157.122.54.189:9093/images/hotel-pics/1.jpeg" alt />
+              <el-col :span="12" class="small_pictures" v-for="(item,index) in imgList" :key='index'>
+                <img :src=item alt @click='handleChange(index)'/>
               </el-col>
             </el-row>
           </el-col>
@@ -32,7 +17,28 @@
 
 <script>
 export default {
-
+      data() {
+        return {
+        current:0,
+        imgList:[
+          '/images/hotel-pics/1.jpeg', 
+          '/images/hotel-pics/2.jpeg',
+          '/images/hotel-pics/3.jpeg',
+          '/images/hotel-pics/4.jpeg',
+          '/images/hotel-pics/5.jpeg',
+          '/images/hotel-pics/6.jpeg',          
+        ],
+        products:[]
+        }
+      },
+      methods: {
+        handleChange(index){
+          this.current = index
+        }
+      },
+      mounted() {
+        
+      },
 }
 </script>
 

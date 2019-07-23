@@ -1,43 +1,82 @@
 <template>
-    <div class="hoteltable">
-         <el-table :data="tableData" style="width: 100%" type="flex" justify="space-between" >
-        <el-table-column prop="date" label="价格来源" ></el-table-column>
-        <el-table-column prop="name" label="低价房型" ></el-table-column>
-        <el-table-column prop="address" label="最低价格/每晚" ><span class="price">￥62 </span> 起 <i class="el-icon-arrow-right height-light icon_img"></i></el-table-column>
-      </el-table>
+      <div class="table">
+        <el-row type="flex" class="table_title">
+            <el-col :span="10">价格来源</el-col>
+            <el-col :span="10">低价房型</el-col>
+            <el-col :span="4">最低价格/每晚</el-col>
+        </el-row>
+        <el-row type="flex" class="table_main" v-for="(item,index) in data" :key='index' @click.native="handleClick">
+        <a href="https://hotels.ctrip.com/hotel/694679.html">
+          <el-col :span="10">{{item.name}}</el-col>
+            <el-col :span="10">{{item.bestType}}</el-col>
+            <el-col :span="4">
+              <span>￥{{item.price}}</span>起
+              <i>></i>
+            </el-col>
+        </a>
+          </el-row>
+
+        
     </div>
 </template>
 
 <script>
 export default {
- data() {
+      data() {
         return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }]
+    
         }
-      }
+      },
+      props:{
+        data:{
+          type : Array,
+          default:[]
+        } 
+      },
+      methods: {
+        handleClick(){
+            
+        }
+      },
+      mounted() {
+        // console.log(this.data);
+      },
 }
+
 </script>
 
 <style lang="less" scope>
-.hoteltable{
-    margin-top:  20px;
-    .price {
-color:orange;
-    }
-    .icon_img{
-        color:orange;
-    }
+a{
+  display: block;
+  width: 100%
+}
+ .table{
+    .table_title{
+      font-size: 14px;
+      padding:20px 0px;
+      color: #666;
+      font-weight: 700;
+      border-bottom: 1px solid #eee;
+      margin-left: 10px;
+}
+  .table_main{
+      font-size: 12px;
+      padding:15px 5px;
+      border-bottom: 1px solid #eee;
+      margin-left: 10px;
+      &:hover{
+        background-color: #ebeef5;
+        cursor: pointer;
+      }
+     span{
+       color: orange;
+       font-size: 14px;
+       padding: 0 5px;
+       
+     }
+     i{
+       color: orange;
+     }
+}
 }
 </style>
