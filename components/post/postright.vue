@@ -2,8 +2,13 @@
   <div class="postright">
     <!-- 搜索框 -->
     <el-row type="flex" class="search">
-      <el-input placeholder="请输入想去的地方,比如:'广州'" class="el_inp"></el-input>
-      <el-button type="primary" icon="el-icon-search" class="el_btn"></el-button>
+      <el-input placeholder="请输入想去的地方,比如:'广州'" class="el_inp" v-model="search_input"></el-input>
+      <el-button
+        type="primary"
+        icon="el-icon-search"
+        class="el_btn"
+        @click="click_search_input(`/post?city=${search_input}`)"
+      ></el-button>
     </el-row>
     <!-- 推荐 -->
     <div>
@@ -16,7 +21,7 @@
         <nuxt-link
           v-for="(item, index) in ['广州','上海','北京']"
           :key="index"
-          :to="`/post?city=${item}`"
+          :to="`/post?city=${item }`"
           class="nuxt_link_tui"
         >
           <span>{{item[0]}}</span>
@@ -34,7 +39,8 @@
     <div>
       <div v-for="(item, index) in dataList" :key="index">
         <div>
-          <a href>{{item.title}}</a>
+          <!-- <a href></a> -->
+          <nuxt-link to="/post/tourism">{{item.title}}</nuxt-link>
           <a :href="`/post/detail?id=${item.id}`" class="post_item" v-html="item.summary"></a>
           <div>
             <el-row class="a_img" type="flex" justify="space-between">
@@ -84,7 +90,8 @@ export default {
       images: [],
       pageIndex: 1, // 当前页数
       pageSize: 2, // 当前页面的条数
-      total: 0 // 总条数
+      total: 0, // 总条数
+      search_input: ""
     };
   },
   watch: {
@@ -130,6 +137,23 @@ export default {
     // 页数的切换，value是选中的页数
     handleCurrentChange(value) {
       this.pageIndex = value;
+    },
+    click_search_input(value) {
+      const { city } = this.$route.query;
+      this.$axios({
+        url: "/posts",
+        params: {
+          // _start: this.pageIndex,
+          // _limit: this.pageSize,
+          city
+        }
+      }).then(res => {
+        console.log(res);
+        const { data } = res.data;
+        this.data = data;
+        this.total = res.data.total;
+        // console.log(total)
+      });
     }
   },
   computed: {
