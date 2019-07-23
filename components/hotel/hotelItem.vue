@@ -113,22 +113,23 @@ export default {
     },
     // 进入酒店详情
     openDetail(id) {
-      console.log(id);
       this.$router.push({
-        path: "hotel/hotelDetails?id="+id
+        path: "hotel/hotelDetails?id=" + id
       });
     }
   },
   computed: {
     // 当前页面渲染的列表数据
     dataList() {
-      console.log(58);
-      let data = this.$store.state.hotel.infoData.data.slice(
-        (this.pageIndex - 1) * this.pageSize,
-        this.pageSize * this.pageIndex
-      );
-      console.log(data);
-      return data;
+      if (this.$store.state.hotel.infoData.data.length > 0) {
+        let data = this.$store.state.hotel.infoData.data.slice(
+          (this.pageIndex - 1) * this.pageSize,
+          this.pageSize * this.pageIndex
+        );
+        return data;
+      } else {
+        return [];
+      }
     }
   }
 };

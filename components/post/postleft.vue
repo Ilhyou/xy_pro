@@ -3,7 +3,7 @@
     <el-collapse v-model="activeName" accordion class="navs">
       <el-collapse-item v-for="(item, index) in data" :key="index" :title="item.type" :name="index">
         <div v-for="(item, index) in item.children" :key="index">
-          <span>{{index+1+"."}}{{item.city+"-"+item.desc}}</span>
+          <nuxt-link :to="`/post?city=${item.city}`">{{index+1+"."}}{{item.city+"-"+item.desc}}</nuxt-link>
         </div>
       </el-collapse-item>
     </el-collapse>

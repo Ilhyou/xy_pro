@@ -1,17 +1,14 @@
 <template>
   <el-row class="aside">
-    <h4 class="aside-title">
-      相关攻略
-    </h4>
     <el-row class="recommend-list">
       <nuxt-link to="*" class="recommend-item">
         <el-row type="flex" class="post-imgText">
           <el-row type="flex" class="post-img" style="align-items: center;">
-            <img data-v-741ea8d8="" src="http://157.122.54.189:9095/uploads/10c5c60bcb4648e5aaeb09c9db60248c.gif">
+            <img data-v-741ea8d8="" :src="data.images[0]">
           </el-row>
           <div class="post-text">
-            <div>test</div>
-            <p>2019-07-21 2:12 阅读 32</p>
+            <div>{{ data.title }}</div>
+            <p>{{ data.city.created_at }} 阅读 {{ data.watch }}</p>
           </div>
         </el-row>
       </nuxt-link>
@@ -21,7 +18,12 @@
 
 <script>
 export default {
-
+  props: {
+    data: {
+      type: Object, // 声明属性的类型
+      default: () => ({})// 属性的默认值
+    }
+  }
 }
 </script>
 
@@ -67,6 +69,8 @@ export default {
                          left: 0;
                          top: 0;
                          width: 100%;
+                         font-size: 12px;
+                         overflow: hidden;
                     }
                     >p{
                           position: absolute;
