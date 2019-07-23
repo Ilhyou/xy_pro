@@ -6,7 +6,7 @@
             <el-col :span="4">最低价格/每晚</el-col>
         </el-row>
         <el-row type="flex" class="table_main" v-for="(item,index) in data" :key='index' @click.native="handleClick">
-        <a href="https://hotels.ctrip.com/hotel/694679.html">
+        <a class='herf' href="https://hotels.ctrip.com/hotel/694679.html">
           <el-col :span="10">{{item.name}}</el-col>
             <el-col :span="10">{{item.bestType}}</el-col>
             <el-col :span="4">
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="less" scope>
-a{
+.herf{
   display: block;
   width: 100%
 }
